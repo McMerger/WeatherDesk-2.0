@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.weatherdesk.view.WeatherController"
+            stylesheets="@../styles/weather.css"
+            styleClass="root">
+
+    <!-- Header -->
+    <top>
+        <VBox styleClass="header" spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="WeatherDesk" styleClass="app-title">
+                <font>
+                    <Font name="PT Sans Bold" size="36"/>
+                </font>
+            </Label>
+            <Label text="Your personal weather station" styleClass="app-subtitle">
+                <font>
+                    <Font name="PT Sans" size="14"/>
+                </font>
+            </Label>
+        </VBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+            <VBox spacing="20" styleClass="main-content">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+
+                <!-- Search Section -->
+                <VBox spacing="15" styleClass="search-section">
+                    <Label text="Search Location" styleClass="section-title">
+                        <font>
+                            <Font name="PT Sans Bold" size="18"/>
+                        </font>
+                    </Label>
+
+                    <!-- Mode Toggle -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <ToggleButton fx:id="coordinateModeToggle" text="Use Coordinates" onAction="#toggleInputMode"/>
+                        <Label text="(Toggle to search by latitude/longitude)" styleClass="hint-text"/>
+                    </HBox>
+
+                    <!-- City Input -->
+                    <VBox fx:id="cityInputBox" spacing="10">
+                        <Label text="City Name:">
+                            <font>
+                                <Font name="PT Sans" size="14"/>
+                            </font>
+                        </Label>
+                        <HBox spacing="10">
+                            <TextField fx:id="cityTextField" promptText="E.g., London, New York, Tokyo"
+                                       HBox.hgrow="ALWAYS" styleClass="search-input"/>
+                            <Button text="Search" onAction="#searchByCity" styleClass="search-button">
+                                <font>
+                                    <Font name="PT Sans Bold" size="14"/>
+                                </font>
+                            </Button>
+                        </HBox>
+                    </VBox>
+
+                    <!-- Coordinate Input -->
+                    <VBox fx:id="coordinateInputBox" spacing="10" managed="false" visible="false">
+                        <HBox spacing="10">
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Latitude (-90 to 90):">
+                                    <font>
+                                        <Font name="PT Sans" size="14"/>
+                                    </font>
+                                </Label>
+                                <TextField fx:id="latitudeTextField" promptText="E.g., 51.5074" styleClass="search-input"/>
+                            </VBox>
+                            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                <Label text="Longitude (-180 to 180):">
+                                    <font>
+                                        <Font name="PT Sans" size="14"/>
+                                    </font>
+                                </Label>
+                                <TextField fx:id="longitudeTextField" promptText="E.g., -0.1278" styleClass="search-input"/>
+                            </VBox>
+                        </HBox>
+                        <Button text="Search by Coordinates" onAction="#searchByCoordinates" styleClass="search-button">
+                            <font>
+                                <Font name="PT Sans Bold" size="14"/>
+                            </font>
+                        </Button>
+                    </VBox>
+                </VBox>
+
+                <!-- Message Area -->
+                <VBox spacing="5">
+                    <Label fx:id="errorLabel" styleClass="error-message" wrapText="true" managed="false" visible="false"/>
+                    <Label fx:id="successLabel" styleClass="success-message" wrapText="true" managed="false" visible="false"/>
+                </VBox>
+
+                <!-- Loading Indicator -->
+                <HBox fx:id="loadingBox" spacing="10" alignment="CENTER" managed="false" visible="false" styleClass="loading-box">
+                    <ProgressIndicator prefWidth="30" prefHeight="30"/>
+                    <Label text="Loading weather data..." styleClass="loading-text">
+                        <font>
+                            <Font name="PT Sans" size="14"/>
+                        </font>
+                    </Label>
+                </HBox>
+
+                <!-- Current Weather Section -->
+                <VBox fx:id="weatherDataBox" spacing="20" managed="false" visible="false">
+
+                    <!-- Current Weather Card -->
+                    <VBox spacing="15" styleClass="weather-card">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label fx:id="cityLabel" styleClass="city-label">
+                                <font>
+                                    <Font name="PT Sans Bold" size="28"/>
+                                </font>
+                            </Label>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <ComboBox fx:id="tempUnitComboBox" onAction="#changeTempUnit" styleClass="unit-selector"/>
+                        </HBox>
+
+                        <Label fx:id="dateLabel" styleClass="date-label">
+                            <font>
+                                <Font name="PT Sans" size="14"/>
+                            </font>
+                        </Label>
+
+                        <HBox spacing="40" alignment="CENTER">
+                            <VBox alignment="CENTER_LEFT" spacing="5">
+                                <HBox alignment="BASELINE" spacing="5">
+                                    <Label fx:id="temperatureLabel" styleClass="temperature-label">
+                                        <font>
+                                            <Font name="PT Sans Bold" size="72"/>
+                                        </font>
+                                    </Label>
+                                </HBox>
+                                <Label fx:id="conditionLabel" styleClass="condition-label">
+                                    <font>
+                                        <Font name="PT Sans" size="18"/>
+                                    </font>
+                                </Label>
+                            </VBox>
+
+                            <Region HBox.hgrow="ALWAYS"/>
+
+                            <VBox alignment="CENTER_RIGHT" spacing="10">
+                                <Label fx:id="weatherIcon" styleClass="weather-icon">
+                                    <font>
+                                        <Font size="64"/>
+                                    </font>
+                                </Label>
+                                <HBox spacing="15">
+                                    <VBox alignment="CENTER" spacing="5">
+                                        <Label text="💧" styleClass="detail-icon"/>
+                                        <Label fx:id="humidityLabel" styleClass="detail-label"/>
+                                    </VBox>
+                                    <VBox alignment="CENTER" spacing="5">
+                                        <Label text="💨" styleClass="detail-icon"/>
+                                        <Label fx:id="windSpeedLabel" styleClass="detail-label"/>
+                                    </VBox>
+                                </HBox>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+
+                    <!-- 5-Day Forecast Section -->
+                    <VBox spacing="15" styleClass="forecast-section">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+
+                        <Label text="5-Day Forecast" styleClass="section-title">
+                            <font>
+                                <Font name="PT Sans Bold" size="20"/>
+                            </font>
+                        </Label>
+
+                        <GridPane fx:id="forecastGrid" hgap="15" vgap="15"/>
+                    </VBox>
+
+                    <!-- Rating Section -->
+                    <VBox spacing="15" styleClass="rating-section" alignment="CENTER">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+
+                        <Label text="How accurate was the forecast?" styleClass="rating-question">
+                            <font>
+                                <Font name="PT Sans" size="14"/>
+                            </font>
+                        </Label>
+
+                        <HBox fx:id="ratingStars" spacing="10" alignment="CENTER"/>
+
+                        <Button text="Submit Rating" onAction="#submitRating" styleClass="submit-rating-button">
+                            <font>
+                                <Font name="PT Sans Bold" size="14"/>
+                            </font>
+                        </Button>
+
+                        <Label fx:id="averageRatingLabel" styleClass="average-rating" managed="false" visible="false"/>
+                    </VBox>
+
+                </VBox>
+
+                <!-- Welcome/Empty State -->
+                <VBox fx:id="emptyStateBox" spacing="20" alignment="CENTER" styleClass="empty-state">
+                    <padding>
+                        <Insets top="60" right="20" bottom="60" left="20"/>
+                    </padding>
+                    <Label text="☁️" styleClass="empty-state-icon">
+                        <font>
+                            <Font size="72"/>
+                        </font>
+                    </Label>
+                    <Label text="Welcome to WeatherDesk" styleClass="empty-state-title">
+                        <font>
+                            <Font name="PT Sans Bold" size="24"/>
+                        </font>
+                    </Label>
+                    <Label text="Enter a city name or coordinates to get started" styleClass="empty-state-subtitle">
+                        <font>
+                            <Font name="PT Sans" size="14"/>
+                        </font>
+                    </Label>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox styleClass="footer" spacing="10" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            <Label fx:id="firebaseStatusLabel" text="Firebase: Not Connected" styleClass="status-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Powered by Open-Meteo API" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

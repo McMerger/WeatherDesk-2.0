@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git clone:*)",
+      "Bash(test:*)",
+      "Bash(cp:*)",
+      "Bash(./gradlew build:*)",
+      "Bash(java -version:*)",
+      "Bash(wmic:*)",
+      "Bash(findstr:*)",
+      "Bash(set GRADLE_USER_HOME=D:.gradle)",
+      "Bash(./gradlew run:*)",
+      "Bash(set JAVA_OPTS=-Djava.io.tmpdir=D:temp:*)",
+      "Bash(npm run dev:*)",
+      "Bash(netstat:*)",
+      "Bash(taskkill:*)",
+      "Bash(curl:*)",
+      "Bash(timeout /t 15)",
+      "Bash(gh:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(git remote remove:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

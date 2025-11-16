@@ -1,0 +1,585 @@
+/* ==========================================
+   WeatherDesk Modern UI - Advanced Styling
+   Glassmorphism, Animations, and Gradients
+   ========================================== */
+
+/* Root Variables */
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    -fx-base: #1a1a2e;
+    -fx-background: #0f0f1e;
+    -fx-accent: #4cc9f0;
+    -fx-focus-color: #4cc9f0;
+    -fx-faint-focus-color: rgba(76, 201, 240, 0.2);
+}
+
+/* Main Application Background */
+.main-pane {
+    -fx-background-color: linear-gradient(
+        from 0% 0% to 100% 100%,
+        #0f0f1e 0%,
+        #1a1a2e 50%,
+        #16213e 100%
+    );
+}
+
+/* ==========================================
+   Glassmorphism Components
+   ========================================== */
+
+.glass-card {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 25px;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 1px;
+    -fx-border-radius: 25px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.3, 0, 10);
+    -fx-padding: 30px;
+}
+
+.glass-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.4), 30, 0.5, 0, 10);
+}
+
+.glass-input {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 15px;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 1px;
+    -fx-border-radius: 15px;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-padding: 12px 20px;
+    -fx-font-size: 14px;
+}
+
+.glass-input:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.12);
+    -fx-border-color: #4cc9f0;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, #4cc9f0, 15, 0.5, 0, 0);
+}
+
+.glass-button {
+    -fx-background-color: linear-gradient(
+        to bottom,
+        rgba(76, 201, 240, 0.8),
+        rgba(72, 149, 239, 0.8)
+    );
+    -fx-background-radius: 15px;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 30px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.5), 15, 0.5, 0, 5);
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-width: 1px;
+    -fx-border-radius: 15px;
+}
+
+.glass-button:hover {
+    -fx-background-color: linear-gradient(
+        to bottom,
+        rgba(76, 201, 240, 1),
+        rgba(72, 149, 239, 1)
+    );
+    -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.8), 20, 0.6, 0, 5);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.glass-button:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.4), 10, 0.4, 0, 2);
+}
+
+/* ==========================================
+   Header Styling
+   ========================================== */
+
+.header {
+    -fx-background-color: rgba(26, 26, 46, 0.7);
+    -fx-padding: 30px 40px;
+}
+
+.app-title {
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to right, #4cc9f0, #7209b7);
+    -fx-effect: dropshadow(gaussian, #4cc9f0, 20, 0.7, 0, 0);
+}
+
+.app-subtitle {
+    -fx-font-size: 16px;
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-font-style: italic;
+}
+
+/* ==========================================
+   Weather Display
+   ========================================== */
+
+.weather-main-card {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 30px;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 30px;
+    -fx-padding: 40px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 30, 0.4, 0, 15);
+}
+
+.temperature-display {
+    -fx-font-size: 96px;
+    -fx-font-weight: bold;
+    -fx-fill: linear-gradient(
+        from 0% 0% to 100% 100%,
+        white,
+        #4cc9f0
+    );
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 5);
+}
+
+.temperature-label {
+    -fx-font-size: 96px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 5);
+}
+
+.city-label {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 2);
+}
+
+.condition-label {
+    -fx-font-size: 24px;
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+    -fx-font-style: italic;
+}
+
+.weather-icon {
+    -fx-font-size: 96px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0.5, 0, 5);
+}
+
+.detail-icon {
+    -fx-font-size: 28px;
+}
+
+.detail-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: rgba(255, 255, 255, 0.9);
+    -fx-font-weight: bold;
+}
+
+/* ==========================================
+   Interactive Elements
+   ========================================== */
+
+.search-input {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 12px;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-width: 1px;
+    -fx-border-radius: 12px;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-font-size: 15px;
+    -fx-padding: 12px 20px;
+}
+
+.search-input:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: #4cc9f0;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, #4cc9f0, 15, 0.6, 0, 0);
+}
+
+.search-button {
+    -fx-background-color: linear-gradient(to bottom, #4cc9f0, #4895ef);
+    -fx-background-radius: 12px;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 40px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.5), 12, 0.5, 0, 4);
+}
+
+.search-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #5dd9ff, #5fa5ff);
+    -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.8), 18, 0.6, 0, 6);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.search-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #3db9e0, #3885df);
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+
+.toggle-button {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 10px;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 25px;
+    -fx-cursor: hand;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+.toggle-button:selected {
+    -fx-background-color: linear-gradient(to bottom, #4cc9f0, #4895ef);
+    -fx-border-color: #4cc9f0;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.6), 12, 0.5, 0, 0);
+}
+
+.toggle-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ==========================================
+   Combo Box (Unit Selector)
+   ========================================== */
+
+.combo-box {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 10px;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: rgba(26, 26, 46, 0.95);
+    -fx-text-fill: white;
+    -fx-padding: 8px 15px;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: rgba(76, 201, 240, 0.3);
+}
+
+.combo-box .list-cell:selected {
+    -fx-background-color: rgba(76, 201, 240, 0.5);
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: rgba(26, 26, 46, 0.98);
+    -fx-background-radius: 10px;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 20, 0.5, 0, 10);
+}
+
+/* ==========================================
+   Rating System
+   ========================================== */
+
+.rating-star {
+    -fx-cursor: hand;
+    -fx-padding: 5px;
+}
+
+.rating-star-empty {
+    -fx-text-fill: rgba(255, 255, 255, 0.3);
+}
+
+.rating-star-filled {
+    -fx-text-fill: #ffd700;
+    -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.8), 10, 0.8, 0, 0);
+}
+
+.rating-star:hover {
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+.submit-rating-button {
+    -fx-background-color: linear-gradient(to right, #f72585, #7209b7);
+    -fx-background-radius: 12px;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 30px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(247, 37, 133, 0.5), 12, 0.5, 0, 4);
+}
+
+.submit-rating-button:hover {
+    -fx-background-color: linear-gradient(to right, #ff3595, #8219c7);
+    -fx-effect: dropshadow(gaussian, rgba(247, 37, 133, 0.8), 18, 0.6, 0, 6);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.average-rating {
+    -fx-font-size: 14px;
+    -fx-text-fill: rgba(255, 255, 255, 0.8);
+    -fx-font-style: italic;
+}
+
+/* ==========================================
+   Messages & Feedback
+   ========================================== */
+
+.error-message {
+    -fx-background-color: rgba(220, 53, 69, 0.2);
+    -fx-background-radius: 10px;
+    -fx-border-color: #dc3545;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #ff6b7a;
+    -fx-font-size: 14px;
+    -fx-padding: 12px 20px;
+    -fx-effect: dropshadow(gaussian, rgba(220, 53, 69, 0.4), 10, 0.5, 0, 2);
+}
+
+.success-message {
+    -fx-background-color: rgba(40, 167, 69, 0.2);
+    -fx-background-radius: 10px;
+    -fx-border-color: #28a745;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #5dff8a;
+    -fx-font-size: 14px;
+    -fx-padding: 12px 20px;
+    -fx-effect: dropshadow(gaussian, rgba(40, 167, 69, 0.4), 10, 0.5, 0, 2);
+}
+
+.info-card {
+    -fx-background-color: rgba(76, 201, 240, 0.15);
+    -fx-background-radius: 15px;
+    -fx-border-color: rgba(76, 201, 240, 0.4);
+    -fx-border-width: 1px;
+    -fx-border-radius: 15px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.3), 12, 0.4, 0, 4);
+}
+
+/* ==========================================
+   Loading Indicators
+   ========================================== */
+
+.loading-box {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 15px;
+    -fx-padding: 20px 40px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.3, 0, 5);
+}
+
+.loading-text {
+    -fx-font-size: 16px;
+    -fx-text-fill: rgba(255, 255, 255, 0.8);
+}
+
+.progress-indicator {
+    -fx-progress-color: #4cc9f0;
+}
+
+.progress-indicator .percentage {
+    -fx-fill: white;
+}
+
+/* ==========================================
+   Scroll Pane
+   ========================================== */
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .scroll-bar {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 8px;
+}
+
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: rgba(76, 201, 240, 0.5);
+    -fx-background-radius: 8px;
+}
+
+.scroll-pane .scroll-bar .thumb:hover {
+    -fx-background-color: rgba(76, 201, 240, 0.7);
+}
+
+.scroll-pane .scroll-bar .increment-button,
+.scroll-pane .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+/* ==========================================
+   Content Cards
+   ========================================== */
+
+.trivia-card {
+    -fx-background-color: rgba(114, 9, 183, 0.15);
+    -fx-background-radius: 18px;
+    -fx-border-color: rgba(114, 9, 183, 0.4);
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 18px;
+    -fx-padding: 25px;
+    -fx-effect: dropshadow(gaussian, rgba(114, 9, 183, 0.3), 15, 0.4, 0, 5);
+}
+
+.quote-card {
+    -fx-background-color: rgba(247, 37, 133, 0.15);
+    -fx-background-radius: 18px;
+    -fx-border-color: rgba(247, 37, 133, 0.4);
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 18px;
+    -fx-padding: 25px;
+    -fx-effect: dropshadow(gaussian, rgba(247, 37, 133, 0.3), 15, 0.4, 0, 5);
+}
+
+.activity-card {
+    -fx-background-color: rgba(56, 189, 248, 0.15);
+    -fx-background-radius: 18px;
+    -fx-border-color: rgba(56, 189, 248, 0.4);
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 18px;
+    -fx-padding: 25px;
+    -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.3), 15, 0.4, 0, 5);
+}
+
+.content-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.content-text {
+    -fx-font-size: 15px;
+    -fx-text-fill: rgba(255, 255, 255, 0.85);
+    -fx-line-spacing: 2px;
+}
+
+/* ==========================================
+   Footer
+   ========================================== */
+
+.footer {
+    -fx-background-color: rgba(26, 26, 46, 0.8);
+    -fx-padding: 15px 30px;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1px 0 0 0;
+}
+
+.footer-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: rgba(255, 255, 255, 0.6);
+}
+
+.status-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 5px 12px;
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 8px;
+}
+
+/* ==========================================
+   Empty State
+   ========================================== */
+
+.empty-state {
+    -fx-padding: 60px;
+}
+
+.empty-state-icon {
+    -fx-font-size: 96px;
+    -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.5), 20, 0.5, 0, 0);
+}
+
+.empty-state-title {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.empty-state-subtitle {
+    -fx-font-size: 16px;
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+}
+
+/* ==========================================
+   Animations
+   ========================================== */
+
+@keyframes fadeIn {
+    from { -fx-opacity: 0; }
+    to { -fx-opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { -fx-translate-y: -30px; -fx-opacity: 0; }
+    to { -fx-translate-y: 0; -fx-opacity: 1; }
+}
+
+@keyframes pulse {
+    0%, 100% { -fx-scale-x: 1; -fx-scale-y: 1; }
+    50% { -fx-scale-x: 1.05; -fx-scale-y: 1.05; }
+}
+
+@keyframes glow {
+    0%, 100% { -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.5), 15, 0.5, 0, 0); }
+    50% { -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 1), 25, 0.8, 0, 0); }
+}
+
+/* Animation classes */
+.fade-in {
+    -fx-animation: fadeIn 0.5s ease-in;
+}
+
+.slide-in {
+    -fx-animation: slideIn 0.6s ease-out;
+}
+
+.pulse {
+    -fx-animation: pulse 2s ease-in-out infinite;
+}
+
+.glow {
+    -fx-animation: glow 2s ease-in-out infinite;
+}
+
+/* ==========================================
+   Hint Text
+   ========================================== */
+
+.hint-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-font-style: italic;
+}
+
+/* ==========================================
+   Special Effects
+   ========================================== */
+
+.neon-text {
+    -fx-text-fill: #4cc9f0;
+    -fx-effect: dropshadow(gaussian, #4cc9f0, 15, 0.9, 0, 0);
+}
+
+.glow-card {
+    -fx-effect: dropshadow(gaussian, rgba(76, 201, 240, 0.6), 25, 0.7, 0, 0);
+}

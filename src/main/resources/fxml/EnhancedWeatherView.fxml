@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.weatherdesk.view.EnhancedWeatherController"
+           stylesheets="@../styles/modern-weather.css">
+
+    <!-- Background with particles -->
+    <Pane fx:id="backgroundPane" styleClass="main-pane">
+        <!-- Particle canvas will be added here programmatically -->
+    </Pane>
+
+    <!-- Main Content -->
+    <BorderPane>
+        <!-- Header -->
+        <top>
+            <VBox styleClass="header glass-card" spacing="10">
+                <padding>
+                    <Insets top="30" right="40" bottom="30" left="40"/>
+                </padding>
+                <Label text="WeatherDesk" styleClass="app-title">
+                    <font>
+                        <Font name="System Bold" size="48"/>
+                    </font>
+                </Label>
+                <Label text="Where Weather Meets Wonder ✨" styleClass="app-subtitle">
+                    <font>
+                        <Font size="16"/>
+                    </font>
+                </Label>
+            </VBox>
+        </top>
+
+        <!-- Main Content -->
+        <center>
+            <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+                <VBox spacing="30" styleClass="main-content">
+                    <padding>
+                        <Insets top="30" right="40" bottom="30" left="40"/>
+                    </padding>
+
+                    <!-- Search Section -->
+                    <VBox spacing="20" styleClass="glass-card">
+                        <Label text="Search Location" styleClass="content-title">
+                            <font>
+                                <Font name="System Bold" size="24"/>
+                            </font>
+                        </Label>
+
+                        <!-- Mode Toggle -->
+                        <HBox spacing="15" alignment="CENTER_LEFT">
+                            <ToggleButton fx:id="coordinateModeToggle"
+                                        text="Use Interactive Globe"
+                                        onAction="#toggleInputMode"
+                                        styleClass="toggle-button"/>
+                            <Label text="(Toggle to explore locations visually)"
+                                 styleClass="hint-text"/>
+                        </HBox>
+
+                        <!-- City Input -->
+                        <VBox fx:id="cityInputBox" spacing="15">
+                            <Label text="City Name:" textFill="WHITE">
+                                <font>
+                                    <Font size="15"/>
+                                </font>
+                            </Label>
+                            <HBox spacing="15">
+                                <TextField fx:id="cityTextField"
+                                         promptText="E.g., London, New York, Tokyo"
+                                         HBox.hgrow="ALWAYS"
+                                         styleClass="glass-input"/>
+                                <Button text="Search"
+                                      onAction="#searchByCity"
+                                      styleClass="glass-button">
+                                    <font>
+                                        <Font name="System Bold" size="15"/>
+                                    </font>
+                                </Button>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Globe OR Coordinate Input -->
+                        <VBox fx:id="coordinateInputBox" spacing="15" managed="false" visible="false">
+                            <!-- Interactive Globe Container -->
+                            <Label text="🌍 Drag to rotate, click to select coordinates" textFill="WHITE" styleClass="hint-text">
+                                <font>
+                                    <Font size="14"/>
+                                </font>
+                            </Label>
+                            <StackPane fx:id="globeContainer"
+                                     prefHeight="400"
+                                     styleClass="glass-card"/>
+
+                            <!-- Coordinate Fields -->
+                            <HBox spacing="15">
+                                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                                    <Label text="Latitude (-90 to 90):" textFill="WHITE">
+                                        <font>
+                                            <Font size="14"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="latitudeTextField"
+                                             promptText="E.g., 51.5074"
+                                             styleClass="glass-input"/>
+                                </VBox>
+                                <VBox spacing="8" HBox.hgrow="ALWAYS">
+                                    <Label text="Longitude (-180 to 180):" textFill="WHITE">
+                                        <font>
+                                            <Font size="14"/>
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="longitudeTextField"
+                                             promptText="E.g., -0.1278"
+                                             styleClass="glass-input"/>
+                                </VBox>
+                            </HBox>
+                            <Button text="Search by Coordinates"
+                                  onAction="#searchByCoordinates"
+                                  styleClass="glass-button">
+                                <font>
+                                    <Font name="System Bold" size="15"/>
+                                </font>
+                            </Button>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Messages -->
+                    <VBox spacing="10">
+                        <Label fx:id="errorLabel"
+                             styleClass="error-message"
+                             wrapText="true"
+                             managed="false"
+                             visible="false"/>
+                        <Label fx:id="successLabel"
+                             styleClass="success-message"
+                             wrapText="true"
+                             managed="false"
+                             visible="false"/>
+                    </VBox>
+
+                    <!-- Loading -->
+                    <HBox fx:id="loadingBox" spacing="15" alignment="CENTER"
+                        managed="false" visible="false" styleClass="loading-box">
+                        <ProgressIndicator prefWidth="40" prefHeight="40"/>
+                        <Label text="Fetching weather data..." styleClass="loading-text" textFill="WHITE">
+                            <font>
+                                <Font size="16"/>
+                            </font>
+                        </Label>
+                    </HBox>
+
+                    <!-- Weather Display -->
+                    <VBox fx:id="weatherDataBox" spacing="30" managed="false" visible="false">
+
+                        <!-- Current Weather Card -->
+                        <VBox spacing="20" styleClass="weather-main-card">
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label fx:id="cityLabel" styleClass="city-label" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="36"/>
+                                    </font>
+                                </Label>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <ComboBox fx:id="tempUnitComboBox"
+                                        onAction="#changeTempUnit"
+                                        styleClass="combo-box"/>
+                            </HBox>
+
+                            <Label fx:id="dateLabel" styleClass="date-label" textFill="rgba(255,255,255,0.8)">
+                                <font>
+                                    <Font size="16"/>
+                                </font>
+                            </Label>
+
+                            <HBox spacing="50" alignment="CENTER">
+                                <VBox alignment="CENTER_LEFT" spacing="10">
+                                    <HBox alignment="BASELINE" spacing="0">
+                                        <Label fx:id="temperatureLabel" styleClass="temperature-label" textFill="WHITE">
+                                            <font>
+                                                <Font name="System Bold" size="96"/>
+                                            </font>
+                                        </Label>
+                                    </HBox>
+                                    <Label fx:id="conditionLabel" styleClass="condition-label" textFill="rgba(255,255,255,0.9)">
+                                        <font>
+                                            <Font size="24"/>
+                                        </font>
+                                    </Label>
+                                </VBox>
+
+                                <Region HBox.hgrow="ALWAYS"/>
+
+                                <VBox alignment="CENTER_RIGHT" spacing="15">
+                                    <Label fx:id="weatherIcon" styleClass="weather-icon">
+                                        <font>
+                                            <Font size="96"/>
+                                        </font>
+                                    </Label>
+                                    <HBox spacing="20">
+                                        <VBox alignment="CENTER" spacing="8">
+                                            <Label text="💧" styleClass="detail-icon"/>
+                                            <Label fx:id="humidityLabel" styleClass="detail-label" textFill="rgba(255,255,255,0.9)"/>
+                                        </VBox>
+                                        <VBox alignment="CENTER" spacing="8">
+                                            <Label text="💨" styleClass="detail-icon"/>
+                                            <Label fx:id="windSpeedLabel" styleClass="detail-label" textFill="rgba(255,255,255,0.9)"/>
+                                        </VBox>
+                                    </HBox>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <!-- 3D Forecast Carousel -->
+                        <VBox spacing="20" styleClass="glass-card">
+                            <Label text="5-Day Forecast" styleClass="content-title" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="24"/>
+                                </font>
+                            </Label>
+                            <Label text="← Swipe or drag to navigate →" styleClass="hint-text"/>
+                            <StackPane fx:id="forecastCarouselContainer" prefHeight="320"/>
+                        </VBox>
+
+                        <!-- Content Row: Trivia, Quote, Activity -->
+                        <HBox spacing="20">
+                            <!-- Trivia Card -->
+                            <VBox spacing="15" HBox.hgrow="ALWAYS" styleClass="trivia-card">
+                                <Label text="📚 Weather Trivia" styleClass="content-title" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="18"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="triviaLabel"
+                                     wrapText="true"
+                                     styleClass="content-text"
+                                     textFill="rgba(255,255,255,0.85)"/>
+                            </VBox>
+
+                            <!-- Quote Card -->
+                            <VBox spacing="15" HBox.hgrow="ALWAYS" styleClass="quote-card">
+                                <Label text="💬 Daily Motivation" styleClass="content-title" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="18"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="quoteLabel"
+                                     wrapText="true"
+                                     styleClass="content-text"
+                                     textFill="rgba(255,255,255,0.85)"/>
+                            </VBox>
+
+                            <!-- Activity Card -->
+                            <VBox spacing="15" HBox.hgrow="ALWAYS" styleClass="activity-card">
+                                <Label text="🎯 Activity Idea" styleClass="content-title" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="18"/>
+                                    </font>
+                                </Label>
+                                <Label fx:id="activityLabel"
+                                     wrapText="true"
+                                     styleClass="content-text"
+                                     textFill="rgba(255,255,255,0.85)"/>
+                            </VBox>
+                        </HBox>
+
+                        <!-- Rating Section -->
+                        <VBox spacing="20" styleClass="glass-card" alignment="CENTER">
+                            <Label text="How accurate was the forecast?" styleClass="content-title" textFill="WHITE">
+                                <font>
+                                    <Font size="16"/>
+                                </font>
+                            </Label>
+                            <HBox fx:id="ratingStars" spacing="10" alignment="CENTER"/>
+                            <Button text="Submit Rating"
+                                  onAction="#submitRating"
+                                  styleClass="submit-rating-button">
+                                <font>
+                                    <Font name="System Bold" size="14"/>
+                                </font>
+                            </Button>
+                            <Label fx:id="averageRatingLabel"
+                                 styleClass="average-rating"
+                                 textFill="rgba(255,255,255,0.8)"
+                                 managed="false"
+                                 visible="false"/>
+                        </VBox>
+                    </VBox>
+
+                    <!-- Empty State -->
+                    <VBox fx:id="emptyStateBox" spacing="25" alignment="CENTER" styleClass="empty-state">
+                        <Label text="☁️" styleClass="empty-state-icon">
+                            <font>
+                                <Font size="96"/>
+                            </font>
+                        </Label>
+                        <Label text="Welcome to WeatherDesk" styleClass="empty-state-title" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="32"/>
+                            </font>
+                        </Label>
+                        <Label text="Search for a location to see the weather"
+                             styleClass="empty-state-subtitle"
+                             textFill="rgba(255,255,255,0.7)">
+                            <font>
+                                <Font size="16"/>
+                            </font>
+                        </Label>
+                    </VBox>
+
+                </VBox>
+            </ScrollPane>
+        </center>
+
+        <!-- Footer -->
+        <bottom>
+            <HBox styleClass="footer" spacing="15" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="15" right="30" bottom="15" left="30"/>
+                </padding>
+                <Label fx:id="firebaseStatusLabel"
+                     text="Firebase: Not Connected"
+                     styleClass="status-label"
+                     textFill="rgba(255,255,255,0.8)"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Powered by Open-Meteo API ☁️" styleClass="footer-text" textFill="rgba(255,255,255,0.6)"/>
+            </HBox>
+        </bottom>
+    </BorderPane>
+
+</StackPane>
